@@ -2,7 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 const ApiError = require("./app/api-error");
-const contactsRouter = require("./app/routes/contact.route");
+const contactsRouter = require("./app/routers/contact.route");
+
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 // Middleware xử lý lỗi TẬP TRUNG (đặt CUỐI CÙNG)
 app.use((err, req, res, next) => {
+  console.error("🔥 ERROR:", err);   // log chi tiết
   // Nếu có middleware khác đã gửi headers, chuyển tiếp
   if (res.headersSent) {
     return next(err);
